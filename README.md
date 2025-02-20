@@ -19,7 +19,15 @@ npm run check-new
 > [!NOTE]
 > In a real project, inclusion of the generated folder is *required* for any "easy" TS interop/inclusion of necessary types. To that end you can observe the `*.tsconfig.json` files that make things work.:
 >
-> Another option is to link the paths directly, which we end up doing  option option is to link the modules directly
+> Another option is to link the paths directly, with stanzas like:
+> ```
+>   "paths": {
+>      "wasi:http/types@0.2.0": [ "./types/wasi-http-types.d.ts" ]
+>    },
+> ```
+>
+> Since we don't have ambient modules (see below), in a TS context the `paths` based inclusion is the smoothest way to get imports that
+> look like their WIT counterparts.
 
 At current it *seems* like the new method moves us a little further away from the goal of being able to easily import
 interfaces by name (the named modules that we were creating), which is more of a problem for guests than hosts, though code that works for *both* is also beneficial/a worthy sidequest.
