@@ -18,6 +18,8 @@ npm run check-new
 
 > [!NOTE]
 > In a real project, inclusion of the generated folder is *required* for any "easy" TS interop/inclusion of necessary types. To that end you can observe the `*.tsconfig.json` files that make things work.:
+>
+> Another option is to link the paths directly, which we end up doing  option option is to link the modules directly
 
 At current it *seems* like the new method moves us a little further away from the goal of being able to easily import
 interfaces by name (the named modules that we were creating), which is more of a problem for guests than hosts, though code that works for *both* is also beneficial/a worthy sidequest.
@@ -77,7 +79,7 @@ So far, so bad, but this is expected, because we're not outputting [Ambient Modu
 
 However, here is a difference in the ease by which we *get* to Ambient modules for the 3 generation methods.
 
-**At present, the *old* modules get us there quickest -- all we have to do is remove the top level imports/exports, which get considered to be "module augmentations" by TS**.
+**At present, the *old* modules get us there quickest -- all we have to do is remove the top level imports/exports, which get considered to be ["module augmentations"](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) by TS**.
 
 If we do that for all three (in `objdiff-core-diff.d.ts`), output looks like this:
 
