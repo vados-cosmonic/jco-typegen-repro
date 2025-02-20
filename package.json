@@ -1,0 +1,17 @@
+{
+  "name": "repro",
+  "private": true,
+  "files": [
+    "index.js",
+    "generated"
+  ],
+  "scripts": {
+    "check-all": "npm run check-new; npm run check-old-host; npm run check-old-guest",
+    "check-new": "tsc -p new.tsconfig.json",
+    "check-old-host": "tsc -p old-host.tsconfig.json",
+    "check-old-guest": "tsc -p old-guest.tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

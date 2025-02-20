@@ -1,0 +1,62 @@
+package objdiff:core;
+
+use wasi:logging/logging@0.1.0-draft;
+
+interface types {
+  type property-id = string;
+
+  resource diff-config {
+    constructor();
+    set-property: func(id: property-id, value: string) -> result<_, string>;
+    get-property: func(id: property-id) -> result<string, string>;
+  }
+
+  enum object-kind {
+    unknown,
+    elf,
+    macho,
+    pe,
+  }
+
+  flags object-flags {
+    executable,
+    relocatable,
+    shared,
+    stripped,
+    has-debug,
+  }
+
+  resource object-data {
+    parse: static func(
+      data: list<u8>,
+      config: borrow<diff-config>,
+    ) -> result<object-data, string>;
+
+    kind: func() -> object-kind;
+    %flags: func() -> object-flags;
+  }
+
+  resource object-diff {
+    encode: func() -> list<u8>;
+  }
+
+  record diff-result {
+    left: option<object-diff>,
+    right: option<object-diff>,
+  }
+}
+
+interface diff {
+  use types.{
+    object-data,
+    object-diff,
+    diff-config,
+    diff-result
+  };
+
+  run-diff: func(
+    left: option<borrow<object-data>>,
+    right: option<borrow<object-data>>,
+    config: borrow<diff-config>,
+  ) -> result<diff-result, string>;
+}

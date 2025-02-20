@@ -1,0 +1,6 @@
+package examples:component;
+
+world component {
+  import objdiff:core/diff;
+  export version: func() -> string;
+}
