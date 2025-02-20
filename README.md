@@ -30,7 +30,7 @@ Here are some areas that are not quite what I expected
 
 Out of the gate, running `npm run check-all` *should* produce that shows all 3 fail to typecheck, even w/ inclusion of the generated folder(s):
 
-```
+```ts
 ❯ npm run check-all
 
 > check-all
@@ -81,7 +81,7 @@ However, here is a difference in the ease by which we *get* to Ambient modules f
 
 If we do that for all three (in `objdiff-core-diff.d.ts`), output looks like this:
 
-```
+```ts
 jco/repro on  es-modules [?] via  v22.12.0 took 2s
 ❯ npm run check-all
 
